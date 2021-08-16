@@ -3,6 +3,7 @@ package com.example.himalaya.base;
 import android.app.Application;
 import android.content.Context;
 
+import com.example.himalaya.utils.LogUtils;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 import com.ximalaya.ting.android.opensdk.datatrasfer.DeviceInfoProviderDefault;
@@ -28,6 +29,9 @@ public class BaseApplication extends Application {
             mXimalaya.setPackid("com.ximalaya.qunfeng");
             mXimalaya.init(this ,mAppSecret,getDeviceInfoProvider(this));
         }
+
+        //初始化LogUtils
+        LogUtils.init(this.getPackageName(), false);
     }
     public IDeviceInfoProvider getDeviceInfoProvider(Context context) {
         return new DeviceInfoProviderDefault(context) {
@@ -38,5 +42,4 @@ public class BaseApplication extends Application {
             }
         };
     }
-
 }

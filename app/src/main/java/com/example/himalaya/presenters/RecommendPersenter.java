@@ -97,7 +97,7 @@ public class RecommendPersenter implements IRecommendPresenter {
 
     @Override
     public void registerViewCallback(IRecommendViewCallback callback) {
-        if (mCallbacks != null && mCallbacks.contains(callback)) {
+        if (mCallbacks != null && !mCallbacks.contains(callback)) {
             mCallbacks.add(callback);
         }
     }

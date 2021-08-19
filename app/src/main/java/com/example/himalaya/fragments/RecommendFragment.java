@@ -66,7 +66,7 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
 
         //获取到逻辑层对象
         mRecommendPersenter = RecommendPersenter.getInstance();
-        //设置通知借口的注册
+        //设置通知接口的注册
         mRecommendPersenter.registerViewCallback(this);
         //获取推荐列表
         mRecommendPersenter.getRecommendList();

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/shape_album_item_bg"
+    android:layout_height="75dp">
+
+    <com.example.himalaya.views.RoundRectImageView
+        android:id="@+id/album_cover"
+        android:layout_width="68dp"
+        android:layout_height="65dp"
+        android:scaleType="fitXY"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/album_cover"
+        android:orientation="vertical">
+        <TextView
+            android:lines="1"
+            android:textSize="18sp"
+            android:id="@+id/album_title_tv"
+            android:text="我的臭宝儿：宝儿"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/album_description_tv"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="3dp"
+            android:text="这个夏天我所有的美好"
+            android:textSize="12sp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:src="@mipmap/play_info_icon"/>
+                <TextView
+                    android:id="@+id/album_play_count"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:text="245.3万"
+                    android:textSize="7sp"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="#ff848484"/>
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:src="@mipmap/ic_sound"/>
+                <TextView
+                    android:id="@+id/album_content_size"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:text="23集"
+                    android:textSize="7sp"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="#ff848484"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

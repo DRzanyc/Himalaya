@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.himalaya.R;
+import com.example.himalaya.utils.LogUtils;
 import com.squareup.picasso.Picasso;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 
@@ -22,7 +23,9 @@ import java.util.List;
  */
 public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdapter.InnerHolder> {
 
+    private static final String TAG = "RecommendListAdapter";
     private List<Album> mData = new ArrayList<>();
+    private OnRecommendItemClickListener mItemClickListener;
 
     @NonNull
     @Override
@@ -37,6 +40,16 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
     public void onBindViewHolder(@NonNull InnerHolder holder, int position) {
         //设置View
         holder.itemView.setTag(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mItemClickListener != null) {
+                    int clickPosition =(int) v.getTag();
+                    mItemClickListener.onItemClick(clickPosition,mData.get(position));
+                }
+                LogUtils.d(TAG, "onclick-----------" + v.getTag());
+            }
+        });
         holder.setData(mData.get(position));
     }
 
@@ -79,11 +92,19 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
 
             albumTitleTv.setText(album.getAlbumTitle());
             albumDescrTv.setText(album.getAlbumIntro());
-            albumPlayCountTv.setText(album.getPlayCount()+"");
-            albumCountSizeTv.setText(album.getIncludeTrackCount()+"");
+            albumPlayCountTv.setText(album.getPlayCount() + "");
+            albumCountSizeTv.setText(album.getIncludeTrackCount() + "");
 
             Picasso.get().load(album.getCoverUrlLarge()).into(albumCoverIv);
 
         }
+    }
+
+    public void setOnRecommendItemClickListener(OnRecommendItemClickListener listener) {
+        this.mItemClickListener = listener;
+    }
+
+    public interface OnRecommendItemClickListener {
+        void onItemClick(int posstion, Album album);
     }
 }

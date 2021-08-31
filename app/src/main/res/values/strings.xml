@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Himalaya</string>
+    <string name="tv_detail_title">这是标题</string>
+    <string name="tv_detail_author">这个是作者信息</string>
+    <string name="tv_detail_selection">选集</string>
+    <string name="tv_detail_continues_play">继续播放</string>
+    <string name="tv_detail_subscribe">+ 订阅</string>
 
     <!--title-->
     <string-array name="indicator_title">

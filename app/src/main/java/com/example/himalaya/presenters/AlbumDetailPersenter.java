@@ -1,11 +1,24 @@
 package com.example.himalaya.presenters;
 
+import android.util.Log;
+
+import androidx.annotation.Nullable;
+
 import com.example.himalaya.interfaces.IAlbumDetailPersenter;
 import com.example.himalaya.interfaces.IAlbunDetailViewCallback;
+import com.example.himalaya.utils.Constents;
+import com.example.himalaya.utils.LogUtils;
+import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
+import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
+import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
+import com.ximalaya.ting.android.opensdk.model.track.Track;
+import com.ximalaya.ting.android.opensdk.model.track.TrackList;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author: Liu
@@ -13,6 +26,7 @@ import java.util.List;
  */
 public class AlbumDetailPersenter implements IAlbumDetailPersenter {
 
+    private static final String TAG = "AlbumDetailPersenter";
     private List<IAlbunDetailViewCallback> mCallbacks = new ArrayList<>();
 
     private Album mTargetAlbum = null;
@@ -43,9 +57,55 @@ public class AlbumDetailPersenter implements IAlbumDetailPersenter {
 
     }
 
+    /**
+     * 根据页码和专辑ID获取详情列表
+     *
+     * @param albumId
+     * @param page
+     */
     @Override
     public void getAlbumDetail(int albumId, int page) {
+        Map<String, String> map = new HashMap<>();
+        map.put(DTransferConstants.ALBUM_ID, albumId + "");
+        map.put(DTransferConstants.SORT, "asc");
+        map.put(DTransferConstants.PAGE, page + "");
+        map.put(DTransferConstants.PAGE_SIZE, Constents.COUNT_DEFAULT + "");
+        CommonRequest.getTracks(map, new IDataCallBack<TrackList>() {
+            @Override
+            public void onSuccess(@Nullable TrackList trackList) {
+                if (trackList != null) {
+                    List<Track> tracks = trackList.getTracks();
+                    LogUtils.d(TAG, "tracks: " + tracks.size());
 
+                    handlerAlbumDetailResult(tracks);
+
+                }
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMsg) {
+                LogUtils.d(TAG, "errorcode ------>" + errorCode);
+                LogUtils.d(TAG, "errormsg ------>" + errorMsg);
+                handlerError(errorCode,errorMsg);
+            }
+        });
+    }
+
+    /**
+     * 网络错误，通知UI
+     * @param errorCode
+     * @param errorMsg
+     */
+    private void handlerError(int errorCode, String errorMsg) {
+        for (IAlbunDetailViewCallback callback : mCallbacks) {
+            callback.onNetworkError(errorCode,errorMsg);
+        }
+    }
+
+    private void handlerAlbumDetailResult(List<Track> tracks) {
+        for (IAlbunDetailViewCallback callback : mCallbacks) {
+            callback.onDetailListLoaded(tracks);
+        }
     }
 
     @Override

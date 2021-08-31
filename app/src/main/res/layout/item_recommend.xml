@@ -34,48 +34,54 @@
             android:layout_marginTop="3dp"
             android:text="这个夏天我所有的美好"
             android:textSize="12sp"/>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="8dp"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
+
                 <ImageView
-                    android:layout_width="6dp"
-                    android:layout_height="6dp"
-                    android:src="@mipmap/play_info_icon"/>
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@mipmap/play_info_icon" />
+
                 <TextView
                     android:id="@+id/album_play_count"
                     android:layout_width="45dp"
                     android:layout_height="wrap_content"
-                    android:text="245.3万"
-                    android:textSize="7sp"
                     android:layout_marginLeft="2dp"
-                    android:textColor="#ff848484"/>
+                    android:text="245.3万"
+                    android:textColor="#ff848484"
+                    android:textSize="12sp" />
             </LinearLayout>
+
             <LinearLayout
-                android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
+
                 <ImageView
-                    android:layout_width="6dp"
-                    android:layout_height="6dp"
-                    android:src="@mipmap/ic_sound"/>
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:src="@mipmap/ic_sound" />
+
                 <TextView
                     android:id="@+id/album_content_size"
                     android:layout_width="45dp"
                     android:layout_height="wrap_content"
-                    android:text="23集"
-                    android:textSize="7sp"
                     android:layout_marginLeft="2dp"
-                    android:textColor="#ff848484"/>
+                    android:text="23集"
+                    android:textColor="#ff848484"
+                    android:textSize="12sp" />
             </LinearLayout>
 
 

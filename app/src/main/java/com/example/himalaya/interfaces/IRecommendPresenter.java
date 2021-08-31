@@ -1,10 +1,12 @@
 package com.example.himalaya.interfaces;
 
+import com.example.himalaya.base.IBasePresenter;
+
 /**
  * @author: Liu
  * @date: 2021/8/18
  */
-public interface IRecommendPresenter {
+public interface IRecommendPresenter extends IBasePresenter<IRecommendViewCallback> {
 
     /**
      * 获取推荐内容
@@ -21,15 +23,4 @@ public interface IRecommendPresenter {
      */
     void loadMore();
 
-    /**
-     * 注册UI的回调
-     * @param callback
-     */
-    void registerViewCallback(IRecommendViewCallback callback);
-
-    /**
-     * 取消ui的回调
-     * @param callback
-     */
-    void unRegisterViewCallback(IRecommendViewCallback callback);
 }

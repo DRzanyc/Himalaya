@@ -7,5 +7,8 @@ package com.example.himalaya.utils;
 public class Constents {
 
     //获取推荐列表的专辑数量
-    public static final int RECOMMEND_COUNT = 50;
+    public static final int COUNT_RECOMMEND = 50;
+
+    //默认列表请求数量
+    public static final int COUNT_DEFAULT = 50;
 }

@@ -2,6 +2,7 @@ package com.example.himalaya.presenters;
 
 import androidx.annotation.Nullable;
 
+import com.example.himalaya.api.XimalayaApi;
 import com.example.himalaya.interfaces.IRecommendPresenter;
 import com.example.himalaya.interfaces.IRecommendViewCallback;
 import com.example.himalaya.utils.Constents;
@@ -25,6 +26,7 @@ public class RecommendPersenter implements IRecommendPresenter {
 
     private static final String TAG = "RecommendPersenter";
     private List<IRecommendViewCallback> mCallbacks = new ArrayList<>();
+    private List<Album> mCurrentRecommend = null;
 
     private RecommendPersenter() {
     }
@@ -48,16 +50,22 @@ public class RecommendPersenter implements IRecommendPresenter {
     }
 
     /**
+     * 获取当前的推荐专辑列表
+     * @return 推荐专辑列表 使用前需要判空
+     */
+    public List<Album> getCurrentRecommend(){
+        return mCurrentRecommend;
+    }
+
+    /**
      * 3.10.6 获取猜你喜欢专辑
      */
     @Override
     public void getRecommendList() {
         upDataLoading();
         //获取推荐内容
-        Map<String, String> map = new HashMap<>();
-        //一页数据返回多少条
-        map.put(DTransferConstants.LIKE_COUNT, Constents.COUNT_RECOMMEND + "");
-        CommonRequest.getGuessLikeAlbum(map, new IDataCallBack<GussLikeAlbumList>() {
+        XimalayaApi ximalayaApi = XimalayaApi.getXimalayaApi();
+        ximalayaApi.getRecommendList(new IDataCallBack<GussLikeAlbumList>() {
             @Override
             public void onSuccess(@Nullable GussLikeAlbumList gussLikeAlbumList) {
                 //成功获取数据
@@ -96,6 +104,7 @@ public class RecommendPersenter implements IRecommendPresenter {
                 for (IRecommendViewCallback callback : mCallbacks) {
                     callback.onRecommendListLoaded(albumList);
                 }
+                this.mCurrentRecommend = albumList;
             }
         }
     }

@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">Himalaya</string>
+    <string name="app_name">喜马拉雅</string>
     <string name="tv_detail_title">这是标题</string>
     <string name="tv_detail_author">这个是作者信息</string>
     <string name="tv_detail_selection">选集</string>
-    <string name="tv_detail_continues_play">继续播放</string>
+    <string name="tv_detail_continues_play">点击播放</string>
     <string name="tv_detail_subscribe">+ 订阅</string>
 
     <!--title-->
@@ -12,4 +12,15 @@
         <item>订阅</item>
         <item>历史</item>
     </string-array>
+
+    <string name="play_mode_order_text">顺序播放</string>
+    <string name="play_mode_random_text">随机播放</string>
+    <string name="play_mode_list_text">列表循环</string>
+    <string name="play_mode_single_text">单曲循环</string>
+    <string name="order_text">正序</string>
+    <string name="revers">倒序</string>
+    <string name="playing_text">正在播放</string>
+    <string name="pause_text">已暂停</string>
+    <string name="listener_as_you_like">随便听听</string>
+    <string name="search_title">搜索</string>
 </resources>

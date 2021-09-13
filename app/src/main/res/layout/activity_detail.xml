@@ -39,18 +39,26 @@
 
         <ImageView
             android:id="@+id/detail_play_control"
-            android:layout_width="19dp"
-            android:layout_height="19dp"
+            android:layout_width="39dp"
+            android:layout_height="39dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
             android:contentDescription="TODO"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="5dp"
+            android:paddingBottom="10dp"
             android:src="@mipmap/play_black_normal" />
 
         <TextView
+            android:id="@+id/play_control_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="12dp"
+            android:layout_marginEnd="140dp"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:layout_marginStart="2dp"
+            android:marqueeRepeatLimit="marquee_forever"
             android:layout_toEndOf="@id/detail_play_control"
             android:text="@string/tv_detail_continues_play"
             android:textSize="14sp" />
@@ -116,14 +124,10 @@
         android:id="@+id/detail_list_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/player_control_container" >
+        android:layout_below="@id/player_control_container">
 
 
     </FrameLayout>
-
-
-
-
 
 
 </RelativeLayout>

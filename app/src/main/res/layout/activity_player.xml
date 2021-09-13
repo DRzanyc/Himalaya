@@ -73,34 +73,36 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:src="@mipmap/sort_descending_press"
+                android:id="@+id/player_mode_switch_btn"
+                android:src="@drawable/selector_player_mode_order"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
                 android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/play_pre"
-                android:src="@mipmap/previous_press"
+                android:src="@drawable/selector_player_pre"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
                 android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/btn_play_or_pause"
-                android:src="@mipmap/play_press"
+                android:src="@drawable/selector_player_play"
                 android:layout_width="0dp"
                 android:layout_height="35dp"
                 android:layout_weight="1" />
 
             <ImageView
                 android:id="@+id/play_next"
-                android:src="@mipmap/next_press"
+                android:src="@drawable/selector_player_next"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
                 android:layout_weight="1" />
 
             <ImageView
-                android:src="@mipmap/sort_ascending_press"
+                android:id="@+id/play_list"
+                android:src="@drawable/selector_player_list"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
                 android:layout_weight="1" />

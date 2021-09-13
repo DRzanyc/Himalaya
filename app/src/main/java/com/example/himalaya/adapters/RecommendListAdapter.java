@@ -50,7 +50,7 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
                 LogUtils.d(TAG, "onclick-----------" + v.getTag());
             }
         });
-        holder.setData(mData.get(position));
+            holder.setData(mData.get(position));
     }
 
     @Override
@@ -95,7 +95,12 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
             albumPlayCountTv.setText(album.getPlayCount() + "");
             albumCountSizeTv.setText(album.getIncludeTrackCount() + "");
 
-            Picasso.get().load(album.getCoverUrlLarge()).into(albumCoverIv);
+            if (album.getCoverUrlLarge().isEmpty()) {
+                albumCoverIv.setImageResource(R.mipmap.content_empty);
+            } else{
+                Picasso.get().load(album.getCoverUrlLarge()).into(albumCoverIv);
+            }
+
 
         }
     }

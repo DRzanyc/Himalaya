@@ -18,6 +18,7 @@ import com.example.himalaya.interfaces.IRecommendViewCallback;
 import com.example.himalaya.presenters.AlbumDetailPersenter;
 import com.example.himalaya.presenters.RecommendPersenter;
 import com.example.himalaya.views.UILoader;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 
 import net.lucode.hackware.magicindicator.buildins.UIUtil;
@@ -42,7 +43,7 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
         mUILoader = new UILoader(getContext()) {
             @Override
             protected View getSuccessView(ViewGroup container) {
-                return createSuccesView(layoutInflater,container);
+                return createSuccesView(layoutInflater, container);
             }
         };
 
@@ -54,7 +55,7 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
         //获取推荐列表
         mRecommendPersenter.getRecommendList();
 
-        if (mUILoader.getParent() instanceof ViewGroup){
+        if (mUILoader.getParent() instanceof ViewGroup) {
             ((ViewGroup) mUILoader.getParent()).removeView(mUILoader);
         }
 
@@ -66,6 +67,8 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
 
     private View createSuccesView(LayoutInflater layoutInflater, ViewGroup container) {
         mRootview = layoutInflater.inflate(R.layout.fragment_recommend, container, false);
+        TwinklingRefreshLayout twinklingRefreshLayout = mRootview.findViewById(R.id.over_scroll_view);
+        twinklingRefreshLayout.setPureScrollModeOn();
         //recyclerView 步骤
         mRecommendRv = mRootview.findViewById(R.id.recommend_list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -74,10 +77,10 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
         mRecommendRv.addItemDecoration(new RecyclerView.ItemDecoration() {
             @Override
             public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-                outRect.right = UIUtil.dip2px(view.getContext(),5);
-                outRect.left = UIUtil.dip2px(view.getContext(),5);
-                outRect.top = UIUtil.dip2px(view.getContext(),5);
-                outRect.bottom = UIUtil.dip2px(view.getContext(),5);
+                outRect.right = UIUtil.dip2px(view.getContext(), 5);
+                outRect.left = UIUtil.dip2px(view.getContext(), 5);
+                outRect.top = UIUtil.dip2px(view.getContext(), 5);
+                outRect.bottom = UIUtil.dip2px(view.getContext(), 5);
             }
         });
 
@@ -91,6 +94,7 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
 
     /**
      * 获取到推荐内容的时候调用这个方法
+     *
      * @param result
      */
     @Override

@@ -53,7 +53,7 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.In
 
         //设置数据
         Track track = mDetailData.get(position);
-        orderTv.setText(position + "");
+        orderTv.setText((position + 1) + "");
         titleTv.setText(track.getTrackTitle());
         playCountTv.setText(track.getPlayCount() + "");
         int durationMil = track.getDuration() * 1000;
@@ -68,7 +68,7 @@ public class DetailListAdapter extends RecyclerView.Adapter<DetailListAdapter.In
                 //Toast.makeText(v.getContext(), "click-----   " + position, Toast.LENGTH_SHORT).show();
                 if (mItemClickListener != null) {
                     //参数需要有列表和位置
-                    mItemClickListener.onItemClick(mDetailData,position);
+                    mItemClickListener.onItemClick(mDetailData, position);
                 }
             }
         });

@@ -12,4 +12,7 @@
     <color name="gray">#979797</color>
     <color name="sub_bar">#EBE8E8</color>
 
+    <color name="playList_title">#7D828C</color>
+    <color name="playList_line">#ECEEF0</color>
+
 </resources>

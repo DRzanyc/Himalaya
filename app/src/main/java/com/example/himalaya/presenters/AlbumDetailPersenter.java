@@ -1,9 +1,11 @@
 package com.example.himalaya.presenters;
 
 import android.util.Log;
+import android.widget.Adapter;
 
 import androidx.annotation.Nullable;
 
+import com.example.himalaya.api.XimalayaApi;
 import com.example.himalaya.interfaces.IAlbumDetailPersenter;
 import com.example.himalaya.interfaces.IAlbunDetailViewCallback;
 import com.example.himalaya.utils.Constents;
@@ -28,8 +30,13 @@ public class AlbumDetailPersenter implements IAlbumDetailPersenter {
 
     private static final String TAG = "AlbumDetailPersenter";
     private List<IAlbunDetailViewCallback> mCallbacks = new ArrayList<>();
+    private List<Track> mTracks = new ArrayList<>();
 
     private Album mTargetAlbum = null;
+    //当前的专辑ID
+    private int mCurrentAlbumId = -1;
+    //当前页码
+    private int mCurrentPageIndex = 0;
 
     private AlbumDetailPersenter() {
     }
@@ -52,9 +59,58 @@ public class AlbumDetailPersenter implements IAlbumDetailPersenter {
 
     }
 
+    /**
+     * 加载更多的内容
+     */
     @Override
     public void loadMore() {
+        mCurrentPageIndex++;
+        doLoaded(true);
+    }
 
+    private void doLoaded(final boolean isLoaderMore) {
+        XimalayaApi ximalayaApi = XimalayaApi.getXimalayaApi();
+        ximalayaApi.getAlbumDetail(new IDataCallBack<TrackList>() {
+            @Override
+            public void onSuccess(@Nullable TrackList trackList) {
+                if (trackList != null) {
+                    List<Track> tracks = trackList.getTracks();
+                    LogUtils.d(TAG, "tracks: " + tracks.size());
+                    if (isLoaderMore) {
+                        //上拉加载，结果放到最后面
+                        mTracks.addAll(tracks);
+                        int size = tracks.size();
+                        handlerLoaderMoreResult(size);
+
+                    } else {
+                        //下拉加载，结果放到最前面
+                        mTracks.addAll(0, tracks);
+                    }
+                    handlerAlbumDetailResult(mTracks);
+                }
+            }
+
+            @Override
+            public void onError(int errorCode, String errorMsg) {
+                LogUtils.d(TAG, "errorcode ------>" + errorCode);
+                LogUtils.d(TAG, "errormsg ------>" + errorMsg);
+                if (isLoaderMore) {
+                    mCurrentPageIndex--;
+                }
+                handlerError(errorCode, errorMsg);
+            }
+        }, mCurrentAlbumId, mCurrentPageIndex);
+    }
+
+    /**
+     * 处理加载更多的结果
+     *
+     * @param size
+     */
+    private void handlerLoaderMoreResult(int size) {
+        for (IAlbunDetailViewCallback callback : mCallbacks) {
+            callback.onLoaderMoreFinished(size);
+        }
     }
 
     /**
@@ -65,40 +121,21 @@ public class AlbumDetailPersenter implements IAlbumDetailPersenter {
      */
     @Override
     public void getAlbumDetail(int albumId, int page) {
-        Map<String, String> map = new HashMap<>();
-        map.put(DTransferConstants.ALBUM_ID, albumId + "");
-        map.put(DTransferConstants.SORT, "asc");
-        map.put(DTransferConstants.PAGE, page + "");
-        map.put(DTransferConstants.PAGE_SIZE, Constents.COUNT_DEFAULT + "");
-        CommonRequest.getTracks(map, new IDataCallBack<TrackList>() {
-            @Override
-            public void onSuccess(@Nullable TrackList trackList) {
-                if (trackList != null) {
-                    List<Track> tracks = trackList.getTracks();
-                    LogUtils.d(TAG, "tracks: " + tracks.size());
-
-                    handlerAlbumDetailResult(tracks);
-
-                }
-            }
-
-            @Override
-            public void onError(int errorCode, String errorMsg) {
-                LogUtils.d(TAG, "errorcode ------>" + errorCode);
-                LogUtils.d(TAG, "errormsg ------>" + errorMsg);
-                handlerError(errorCode,errorMsg);
-            }
-        });
+        mTracks.clear();
+        this.mCurrentAlbumId = albumId;
+        this.mCurrentPageIndex = page;
+        doLoaded(false);
     }
 
     /**
      * 网络错误，通知UI
+     *
      * @param errorCode
      * @param errorMsg
      */
     private void handlerError(int errorCode, String errorMsg) {
         for (IAlbunDetailViewCallback callback : mCallbacks) {
-            callback.onNetworkError(errorCode,errorMsg);
+            callback.onNetworkError(errorCode, errorMsg);
         }
     }
 

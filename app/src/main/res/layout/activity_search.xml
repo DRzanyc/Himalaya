@@ -13,33 +13,44 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:layout_marginLeft="5dp"
-            android:layout_marginRight="5dp"
-            android:src="@drawable/selector_back_btn" />
-        <EditText
-            android:background="@drawable/shape_edit_text_bg"
+            android:id="@+id/search_back"
+            android:layout_width="40dp"
+            android:layout_height="22dp"
             android:paddingLeft="10dp"
-            android:hint="请输入专辑关键字"
+            android:paddingRight="10dp"
+            android:src="@drawable/selector_back_btn" />
+
+        <EditText
+            android:id="@+id/search_input"
             android:layout_width="0dp"
+            android:layout_height="30dp"
             android:layout_weight="1"
-            android:layout_height="30dp"/>
+            android:background="@drawable/shape_edit_text_bg"
+            android:hint="请输入专辑关键字"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:singleLine="true"
+            android:textCursorDrawable="@drawable/shape_edit_text_cursor"
+            android:textSize="16sp" />
+
         <TextView
-            android:textColor="@color/main_color"
+            android:id="@+id/search_btn_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:layout_marginLeft="10dp"
-            android:text="@string/search_title"/>
+            android:text="@string/search_title"
+            android:textColor="@color/main_color"
+            android:textSize="18sp" />
     </LinearLayout>
 
     <FrameLayout
         android:id="@+id/search_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent" />
+
+
 
 </LinearLayout>

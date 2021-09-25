@@ -21,7 +21,7 @@ import java.util.List;
  * @author: Liu
  * @date: 2021/8/16
  */
-public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdapter.InnerHolder> {
+public class AlbumListAdapter extends RecyclerView.Adapter<AlbumListAdapter.InnerHolder> {
 
     private static final String TAG = "RecommendListAdapter";
     private List<Album> mData = new ArrayList<>();
@@ -55,7 +55,7 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
 
     @Override
     public int getItemCount() {
-        //返回要显示的个数
+        //返回要显示的个数 
         if (mData != null) {
             return mData.size();
         }

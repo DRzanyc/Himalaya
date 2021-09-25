@@ -18,7 +18,6 @@ import com.example.himalaya.presenters.PlayerPresenter;
 import com.example.himalaya.presenters.RecommendPersenter;
 import com.example.himalaya.utils.LogUtils;
 import com.example.himalaya.views.RoundRectImageView;
-import com.example.himalaya.views.SearchActivity;
 import com.squareup.picasso.Picasso;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 import com.ximalaya.ting.android.opensdk.model.track.Track;

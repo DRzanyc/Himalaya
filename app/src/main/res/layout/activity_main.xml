@@ -25,8 +25,8 @@
             android:layout_weight="1">
 
             <ImageView
-                android:layout_width="15dp"
-                android:layout_height="15dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
                 android:layout_centerInParent="true"
                 android:src="@mipmap/search_icon" />
         </RelativeLayout>

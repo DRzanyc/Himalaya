@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.himalaya.DetailActivity;
 import com.example.himalaya.R;
-import com.example.himalaya.adapters.RecommendListAdapter;
+import com.example.himalaya.adapters.AlbumListAdapter;
 import com.example.himalaya.base.BaseFragment;
 import com.example.himalaya.interfaces.IRecommendViewCallback;
 import com.example.himalaya.presenters.AlbumDetailPersenter;
@@ -29,11 +29,11 @@ import java.util.List;
  * @author: Liu
  * @date: 2021/8/13
  */
-public class RecommendFragment extends BaseFragment implements IRecommendViewCallback, UILoader.OnRetryClickListener, RecommendListAdapter.OnRecommendItemClickListener {
+public class RecommendFragment extends BaseFragment implements IRecommendViewCallback, UILoader.OnRetryClickListener, AlbumListAdapter.OnRecommendItemClickListener {
     private static final String TAG = "RecommendFragment";
     private View mRootview;
     private RecyclerView mRecommendRv;
-    private RecommendListAdapter mRecommendListAdapter;
+    private AlbumListAdapter mRecommendListAdapter;
     private RecommendPersenter mRecommendPersenter;
     private UILoader mUILoader;
 
@@ -85,7 +85,7 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
         });
 
         //设置适配器
-        mRecommendListAdapter = new RecommendListAdapter();
+        mRecommendListAdapter = new AlbumListAdapter();
         mRecommendRv.setAdapter(mRecommendListAdapter);
         mRecommendListAdapter.setOnRecommendItemClickListener(this);
 

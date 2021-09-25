@@ -11,4 +11,8 @@ public class Constents {
 
     //默认列表请求数量
     public static final int COUNT_DEFAULT = 50;
+
+    //热词的数量
+    public static final int COUNT_HOT_WORD = 10;
+
 }

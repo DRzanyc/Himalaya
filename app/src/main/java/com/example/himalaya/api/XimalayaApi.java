@@ -5,7 +5,10 @@ import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
 import com.ximalaya.ting.android.opensdk.model.album.GussLikeAlbumList;
+import com.ximalaya.ting.android.opensdk.model.album.SearchAlbumList;
 import com.ximalaya.ting.android.opensdk.model.track.TrackList;
+import com.ximalaya.ting.android.opensdk.model.word.HotWordList;
+import com.ximalaya.ting.android.opensdk.model.word.SuggestWords;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -60,4 +63,38 @@ public class XimalayaApi {
         CommonRequest.getTracks(map, callBack);
     }
 
+    /**
+     * 根据关键字进行搜索
+     *
+     * @param keyword
+     */
+    public void searchByKeyword(String keyword, int page, IDataCallBack<SearchAlbumList> callback) {
+        Map<String, String> map = new HashMap<>();
+        map.put(DTransferConstants.SEARCH_KEY, keyword);
+        map.put(DTransferConstants.PAGE_SIZE, Constents.COUNT_DEFAULT + "");
+        map.put(DTransferConstants.PAGE, page + "");
+        CommonRequest.getSearchedAlbums(map, callback);
+    }
+
+    /**
+     * 获取推荐的热词
+     *
+     * @param callback
+     */
+    public void getHotWords(IDataCallBack<HotWordList> callback) {
+        Map<String, String> map = new HashMap<>();
+        map.put(DTransferConstants.TOP, String.valueOf(Constents.COUNT_HOT_WORD));
+        CommonRequest.getHotWords(map, callback);
+    }
+
+    /**
+     * 获取某个关键词的联想词
+     *
+     * @param callback
+     */
+    public void getSuggestWord(String keyword, IDataCallBack<SuggestWords> callback) {
+        Map<String, String> map = new HashMap<>();
+        map.put(DTransferConstants.SEARCH_KEY, keyword);
+        CommonRequest.getSuggestWord(map, callback);
+    }
 }

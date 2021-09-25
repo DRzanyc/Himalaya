@@ -41,7 +41,7 @@
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".views.SearchActivity"
+            android:name=".SearchActivity"
             android:screenOrientation="portrait">
         </activity>
 
